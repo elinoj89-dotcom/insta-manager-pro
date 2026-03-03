@@ -1,33 +1,31 @@
 import os
 import time
-import sys
 
 # Couleurs
 G = "\033[32m" # Vert
-R = "\033[31m" # Rouge
 W = "\033[0m"  # Blanc
 P = "\033[35m" # Violet
 
 def setup():
     os.system('clear')
-    print(f"{P}=============================================")
-    print(f"       INSTALLATION DU SYSTÈME SMM         ")
-    print(f"============================================={W}")
+    # Interface inspirée de tes captures d'écran
+    print(f"{P}┌───────────────────────────────────────────┐")
+    print(f"│                PKG INSTALL                │")
+    print(f"└───────────────────────────────────────────┘{W}")
+    print(f"{G}(✓) Github    = elino1000_bot")
+    print(f"(✓) Tool Name = INSTALL{W}")
+    print("-" * 45)
     
-    print(f"\n{G}[*] Mise à jour des paquets...{W}")
-    time.sleep(1)
-    
-    # Installation de la dépendance principale
-    print(f"{G}[*] Installation de instabot en cours...{W}")
+    print(f"\n{P}[*] Installation des dépendances en cours...{W}")
+    # On installe instabot pour le bot
     os.system('pip install instabot')
     
-    print(f"\n{G}[✔] Installation terminée avec succès !{W}")
+    print(f"\n{G}[✔] Installation terminée !{W}")
     time.sleep(2)
     
-    # Lancement automatique du script principal
-    print(f"{G}[*] Lancement de la vérification de sécurité...{W}")
+    # Lancement du script principal
     os.system('python main.py')
 
 if __name__ == "__main__":
     setup()
-  
+    
