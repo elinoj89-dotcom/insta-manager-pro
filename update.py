@@ -51,4 +51,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print(f"\n{R}[!] Annulé.{W}")
         sys.exit()
-        
+            
