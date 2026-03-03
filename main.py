@@ -1,71 +1,22 @@
-from instabot import Bot
-import time
-import random
-from datetime import datetime
+import os
 import sys
+import time
 
-# Style et Couleurs
-G = "\033[32m" # Vert
-R = "\033[31m" # Rouge
-W = "\033[0m"  # Blanc
-Y = "\033[33m" # Jaune
-P = "\033[35m" # Violet
-
-def get_time():
-    return datetime.now().strftime("[%H:%M:%S]")
-
-def check_access():
-    print(f"{P}=============================================")
-    print(f"       SYSTÈME DE SÉCURITÉ SMM             ")
-    print(f"============================================={W}")
+def security():
+    os.system('clear')
+    # Mot de passe demandé : Elino21#2006
+    pwd = input("\033[33m(🔑)Mot De Passe: \033[0m")
     
-    # Ton mot de passe spécifique
-    password = input(f"{get_time()} {Y}[?] Password : {W}")
-    
-    if password == "Elino21#2006":
-        print(f"{get_time()} {G}[✔] Accès autorisé. Bienvenue Elino.{W}\n")
-        time.sleep(1)
+    if pwd == "Elino21#2006":
+        print("\033[32m[✔] Accès autorisé. Téléchargement du bot...\033[0m")
+        time.sleep(2)
+        # La séquence automatique que tu as demandée
+        os.system('cd $HOME && git clone https://github.com/Lariot08/SMM')
+        os.system('cd $HOME/SMM && python bot.py')
     else:
-        print(f"{get_time()} {R}[✘] Mot de passe incorrect.{W}")
+        print("\033[31m[✘] Mot de passe incorrect.\033[0m")
         sys.exit()
 
-def demarrer_bot():
-    check_access()
-    
-    bot = Bot()
-    # Met tes vrais identifiants ici (garde ton dépôt en PRIVÉ !)
-    INSTA_USER = "ton_pseudo"
-    INSTA_PASS = "ton_mot_de_passe"
-
-    if not bot.login(username=INSTA_USER, password=INSTA_PASS):
-        print(f"{get_time()} {R}[✘] Erreur de connexion Instagram.{W}")
-        return
-
-    hashtag = "motivation"
-    medias = bot.get_hashtag_medias(hashtag)
-
-    for i, media_id in enumerate(medias[:5]):
-        # Interface calquée sur tes captures (Screenshot_20260302-143220.png)
-        print(f"{W}[{i+1:02}] Username: {INSTA_USER} {G}[Succès]{W}")
-        
-        # Action Like
-        bot.like(media_id)
-        print(f"{G}[✔] J'aime Succès | + 1.1 CashCoins{W}")
-        
-        # Action Comment
-        bot.comment(media_id, "Super post ! 🔥")
-        print(f"{G}[✔] Commentaire Succès | + 0.5 CashCoins{W}")
-        
-        # Action Follow
-        user_id = bot.get_media_owner(media_id)
-        bot.follow(user_id)
-        print(f"{G}[✔] Follow Succès | + 2.0 CashCoins{W}")
-
-        # Pause de sécurité
-        pause = random.randint(30, 60)
-        print(f"{Y}[~] Pause : {pause}s...{W}")
-        time.sleep(pause)
-
 if __name__ == "__main__":
-    demarrer_bot()
-        
+    security()
+    
