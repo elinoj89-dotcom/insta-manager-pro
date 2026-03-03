@@ -20,6 +20,7 @@ def update_system():
     try:
         if os.path.exists(path):
             print(f"{BOLD}{Y}[*] Synchronisation des fichiers...{W}")
+            # On force la mise à jour pour récupérer le nouveau main.py (le verrou)
             os.system(f'cd {path} && git reset --hard && git pull')
         else:
             print(f"{BOLD}{Y}[*] Réinstallation du dépôt...{W}")
@@ -29,7 +30,9 @@ def update_system():
         print(f"{BOLD}{Y}[*] Lancement du moteur de sécurité...{W}")
         time.sleep(2)
         
-        # Lance le fichier main.py qui demande le mot de passe Elino21#2006
+        # --- CETTE LIGNE EST LA PLUS IMPORTANTE ---
+        # Elle lance le main.py qui se trouve DANS insta-manager-pro
+        # (Celui qui demande le mot de passe Elino21#2006)
         os.system(f'python {path}/main.py')
         
     except Exception as e:
@@ -38,4 +41,4 @@ def update_system():
 
 if __name__ == "__main__":
     update_system()
-                     
+    
