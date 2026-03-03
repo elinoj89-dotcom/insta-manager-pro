@@ -2,36 +2,53 @@ import os
 import time
 import sys
 
-# Couleurs
-P = "\033[35m" # Violet
+# Couleurs pour le style
 G = "\033[32m" # Vert
-W = "\033[0m"  # Blanc
 R = "\033[31m" # Rouge
+Y = "\033[33m" # Jaune
+W = "\033[0m"  # Blanc
+C = "\033[36m" # Cyan
 
-def loader():
+def update_system():
     os.system('clear')
-    # Texte de ton screenshot
-    print(f"{P}Veuillez patienter, installation d'Instagram en cours...{W}")
-    print("-" * 45)
+    print(f"{C}╔═══════════════════════════════════════════╗")
+    print(f"║        MISE À JOUR DU SYSTÈME SMM         ║")
+    print(f"╚═══════════════════════════════════════════╝{W}")
     
-    # Barre de progression animée
-    for i in range(1, 101):
-        time.sleep(0.05)
-        sys.stdout.write(f"\r{G}[*] Configuration des paquets : {i}%")
-        sys.stdout.flush()
+    # Chemin vers le dossier local
+    path = os.path.join(os.path.expanduser("~"), "insta-manager-pro")
     
-    print(f"\n\n{G}[✔] Instagram est prêt !{W}")
-    time.sleep(1.5)
-
-def main():
-    loader()
-    # Après le chargement, on lance automatiquement le bot final
-    # Assure-toi que ton bot se nomme bot.py ou main.py dans ce dossier
-    if os.path.exists("bot.py"):
-        os.system('python bot.py')
-    else:
-        print(f"{R}[!] Erreur : bot.py introuvable dans le dossier.{W}")
+    print(f"\n{Y}[*] Connexion au dépôt GitHub...{W}")
+    time.sleep(1)
+    
+    try:
+        # On s'assure d'être dans le bon dossier
+        if os.path.exists(path):
+            # git reset --hard efface les modifs locales pour éviter les conflits
+            print(f"{Y}[*] Synchronisation des fichiers...{W}")
+            os.system(f'cd {path} && git reset --hard && git pull https://github.com/elinoj89-dotcom/insta-manager-pro.git')
+        else:
+            # Si le dossier n'existe pas, on le clone proprement
+            print(f"{Y}[*] Réinstallation du dépôt...{W}")
+            os.system(f'cd $HOME && git clone https://github.com/elinoj89-dotcom/insta-manager-pro.git')
+        
+        print(f"\n{G}[✔] MISE À JOUR RÉUSSIE !{W}")
+        print(f"{Y}[*] Redémarrage du système...{W}")
+        time.sleep(2)
+        
+        # Relance le menu principal (main.py dans INSTALL)
+        os.system('python ~/INSTALL/main.py')
+        
+    except Exception as e:
+        print(f"\n{R}[✘] Erreur lors de la mise à jour : {e}{W}")
+        print(f"{Y}[!] Vérifiez votre connexion internet.{W}")
+        input(f"\n{C}[ Appuyez sur Entrée pour quitter ]{W}")
+        sys.exit()
 
 if __name__ == "__main__":
-    main()
-  
+    try:
+        update_system()
+    except KeyboardInterrupt:
+        print(f"\n{R}[!] Annulé.{W}")
+        sys.exit()
+        
